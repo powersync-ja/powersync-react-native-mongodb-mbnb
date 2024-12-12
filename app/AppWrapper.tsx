@@ -1,44 +1,23 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Platform, SafeAreaView, StyleSheet } from "react-native";
-import { OpenRealmBehaviorType } from "realm";
-import { AppProvider, UserProvider } from "@realm/react";
 
-import { AnonAuth } from "./AnonAuth";
 import { AirbnbList } from "./AirbnbList";
-import { SyncedRealmProvider } from "./syncedRealm";
-import { LocalRealmProvider } from "./localRealm";
+import { System, useSystem } from "./powersync/System";
+import { PowerSyncContext } from "@powersync/react";
 
-export const AppWrapper: React.FC<{
-  appId: string;
-}> = ({ appId }) => {
-  // If we are logged in, the RealmProviders and the app will be rendered,
-  // using the sync configuration for the `SyncedRealmProvider`.
+export const AppWrapper: React.FC = () => {
+
+  const system: System = useSystem();
+  const db = useMemo(() => {
+    return system.powersync;
+  }, []);
+
   return (
-    <>
+    <PowerSyncContext.Provider value={db}>
       <SafeAreaView style={styles.screen}>
-        <AppProvider id={appId}>
-          <UserProvider fallback={<AnonAuth />}>
-            <SyncedRealmProvider
-              shouldCompact={() => true}
-              sync={{
-                flexible: true,
-                onError: (_, error) => {
-                  // Comment out to hide errors
-                  console.error(error);
-                },
-                existingRealmFileBehavior: {
-                  type: OpenRealmBehaviorType.OpenImmediately,
-                },
-              }}
-            >
-              <LocalRealmProvider>
-                <AirbnbList />
-              </LocalRealmProvider>
-            </SyncedRealmProvider>
-          </UserProvider>
-        </AppProvider>
+          <AirbnbList />
       </SafeAreaView>
-    </>
+    </PowerSyncContext.Provider>
   );
 };
 
