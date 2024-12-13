@@ -115,6 +115,7 @@ PODS:
   - libwebp/sharpyuv (1.3.2)
   - libwebp/webp (1.3.2):
     - libwebp/sharpyuv
+  - powersync-sqlite-core (0.3.7)
   - RCT-Folly (2022.05.16.00):
     - boost
     - DoubleConversion
@@ -988,6 +989,13 @@ PODS:
     - React-debug
   - react-native-get-random-values (1.8.0):
     - React-Core
+  - react-native-quick-sqlite (2.2.0):
+    - glog
+    - powersync-sqlite-core (~> 0.3.6)
+    - RCT-Folly (= 2022.05.16.00)
+    - React
+    - React-callinvoker
+    - React-Core
   - React-nativeconfig (0.73.4)
   - React-NativeModulesApple (0.73.4):
     - glog
@@ -1155,8 +1163,6 @@ PODS:
     - React-jsi (= 0.73.4)
     - React-logger (= 0.73.4)
     - React-perflogger (= 0.73.4)
-  - RealmJS (12.14.0):
-    - React
   - RNFastImage (8.6.3):
     - React-Core
     - SDWebImage (~> 5.11.1)
@@ -1175,19 +1181,19 @@ PODS:
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
-  - "EXConstants (from `../node_modules/.pnpm/expo-constants@15.4.6_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@bab_7zefs7pcimwnp3uvkvsfkzbiia/node_modules/expo-constants/ios`)"
-  - "EXFont (from `../node_modules/.pnpm/expo-font@11.10.3_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@babel+c_fvrdeb7kwfok2thnhin3tvdpny/node_modules/expo-font/ios`)"
-  - "EXJSONUtils (from `../node_modules/.pnpm/expo-json-utils@0.12.3/node_modules/expo-json-utils/ios`)"
-  - "EXManifests (from `../node_modules/.pnpm/expo-manifests@0.13.2_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@bab_5fgr37xkopjwusmgtzkywxgyaa/node_modules/expo-manifests/ios`)"
-  - "Expo (from `../node_modules/.pnpm/expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@babel+core@7.26.0_@babel+_addzvgbcuahevasoaf57znldpe/node_modules/expo`)"
-  - "expo-dev-client (from `../node_modules/.pnpm/expo-dev-client@3.3.12_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@ba_lwqdn6msggdmrtphn3jlkftgqi/node_modules/expo-dev-client/ios`)"
-  - "expo-dev-launcher (from `../node_modules/.pnpm/expo-dev-launcher@3.6.10_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@_zch7sdnxkiseunpufdknao2mni/node_modules/expo-dev-launcher`)"
-  - "expo-dev-menu (from `../node_modules/.pnpm/expo-dev-menu@4.5.8_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@babel_invftc4dkm5euvpijuzx4x2vny/node_modules/expo-dev-menu`)"
-  - "expo-dev-menu-interface (from `../node_modules/.pnpm/expo-dev-menu-interface@1.7.2_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73_lzt2qway5hrxjbwuggabjupr2y/node_modules/expo-dev-menu-interface/ios`)"
-  - "ExpoFileSystem (from `../node_modules/.pnpm/expo-file-system@16.0.9_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@b_tyawzn4m6riuwvellllzbonp5a/node_modules/expo-file-system/ios`)"
-  - "ExpoKeepAwake (from `../node_modules/.pnpm/expo-keep-awake@12.8.2_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@ba_2hj2qmedegshsriugnazjfp6qm/node_modules/expo-keep-awake/ios`)"
-  - "ExpoModulesCore (from `../node_modules/.pnpm/expo-modules-core@1.11.14/node_modules/expo-modules-core`)"
-  - "EXUpdatesInterface (from `../node_modules/.pnpm/expo-updates-interface@0.15.3_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73_3e4z34vcfw3lecdfl3wwa6ylda/node_modules/expo-updates-interface/ios`)"
+  - EXConstants (from `../node_modules/expo-constants/ios`)
+  - EXFont (from `../node_modules/expo-font/ios`)
+  - EXJSONUtils (from `../node_modules/expo-json-utils/ios`)
+  - EXManifests (from `../node_modules/expo-manifests/ios`)
+  - Expo (from `../node_modules/expo`)
+  - expo-dev-client (from `../node_modules/expo-dev-client/ios`)
+  - expo-dev-launcher (from `../node_modules/expo-dev-launcher`)
+  - expo-dev-menu (from `../node_modules/expo-dev-menu`)
+  - expo-dev-menu-interface (from `../node_modules/expo-dev-menu-interface/ios`)
+  - ExpoFileSystem (from `../node_modules/expo-file-system/ios`)
+  - ExpoKeepAwake (from `../node_modules/expo-keep-awake/ios`)
+  - ExpoModulesCore (from `../node_modules/expo-modules-core`)
+  - EXUpdatesInterface (from `../node_modules/expo-updates-interface/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
@@ -1217,6 +1223,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
+  - "react-native-quick-sqlite (from `../node_modules/@journeyapps/react-native-quick-sqlite`)"
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -1237,7 +1244,6 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - RealmJS (from `../node_modules/realm`)
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNFS (from `../node_modules/react-native-fs`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -1247,6 +1253,7 @@ SPEC REPOS:
     - fmt
     - libevent
     - libwebp
+    - powersync-sqlite-core
     - SDWebImage
     - SDWebImageWebPCoder
     - SocketRocket
@@ -1257,31 +1264,31 @@ EXTERNAL SOURCES:
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   EXConstants:
-    :path: "../node_modules/.pnpm/expo-constants@15.4.6_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@bab_7zefs7pcimwnp3uvkvsfkzbiia/node_modules/expo-constants/ios"
+    :path: "../node_modules/expo-constants/ios"
   EXFont:
-    :path: "../node_modules/.pnpm/expo-font@11.10.3_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@babel+c_fvrdeb7kwfok2thnhin3tvdpny/node_modules/expo-font/ios"
+    :path: "../node_modules/expo-font/ios"
   EXJSONUtils:
-    :path: "../node_modules/.pnpm/expo-json-utils@0.12.3/node_modules/expo-json-utils/ios"
+    :path: "../node_modules/expo-json-utils/ios"
   EXManifests:
-    :path: "../node_modules/.pnpm/expo-manifests@0.13.2_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@bab_5fgr37xkopjwusmgtzkywxgyaa/node_modules/expo-manifests/ios"
+    :path: "../node_modules/expo-manifests/ios"
   Expo:
-    :path: "../node_modules/.pnpm/expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@babel+core@7.26.0_@babel+_addzvgbcuahevasoaf57znldpe/node_modules/expo"
+    :path: "../node_modules/expo"
   expo-dev-client:
-    :path: "../node_modules/.pnpm/expo-dev-client@3.3.12_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@ba_lwqdn6msggdmrtphn3jlkftgqi/node_modules/expo-dev-client/ios"
+    :path: "../node_modules/expo-dev-client/ios"
   expo-dev-launcher:
-    :path: "../node_modules/.pnpm/expo-dev-launcher@3.6.10_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@_zch7sdnxkiseunpufdknao2mni/node_modules/expo-dev-launcher"
+    :path: "../node_modules/expo-dev-launcher"
   expo-dev-menu:
-    :path: "../node_modules/.pnpm/expo-dev-menu@4.5.8_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@babel_invftc4dkm5euvpijuzx4x2vny/node_modules/expo-dev-menu"
+    :path: "../node_modules/expo-dev-menu"
   expo-dev-menu-interface:
-    :path: "../node_modules/.pnpm/expo-dev-menu-interface@1.7.2_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73_lzt2qway5hrxjbwuggabjupr2y/node_modules/expo-dev-menu-interface/ios"
+    :path: "../node_modules/expo-dev-menu-interface/ios"
   ExpoFileSystem:
-    :path: "../node_modules/.pnpm/expo-file-system@16.0.9_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@b_tyawzn4m6riuwvellllzbonp5a/node_modules/expo-file-system/ios"
+    :path: "../node_modules/expo-file-system/ios"
   ExpoKeepAwake:
-    :path: "../node_modules/.pnpm/expo-keep-awake@12.8.2_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73.21_@ba_2hj2qmedegshsriugnazjfp6qm/node_modules/expo-keep-awake/ios"
+    :path: "../node_modules/expo-keep-awake/ios"
   ExpoModulesCore:
-    :path: "../node_modules/.pnpm/expo-modules-core@1.11.14/node_modules/expo-modules-core"
+    :path: "../node_modules/expo-modules-core"
   EXUpdatesInterface:
-    :path: "../node_modules/.pnpm/expo-updates-interface@0.15.3_expo@50.0.21_@babel+core@7.26.0_@react-native+babel-preset@0.73_3e4z34vcfw3lecdfl3wwa6ylda/node_modules/expo-updates-interface/ios"
+    :path: "../node_modules/expo-updates-interface/ios"
   FBLazyVector:
     :path: "../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
@@ -1335,6 +1342,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   react-native-get-random-values:
     :path: "../node_modules/react-native-get-random-values"
+  react-native-quick-sqlite:
+    :path: "../node_modules/@journeyapps/react-native-quick-sqlite"
   React-nativeconfig:
     :path: "../node_modules/react-native/ReactCommon"
   React-NativeModulesApple:
@@ -1375,8 +1384,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
-  RealmJS:
-    :path: "../node_modules/realm"
   RNFastImage:
     :path: "../node_modules/react-native-fast-image"
   RNFS:
@@ -1401,12 +1408,13 @@ SPEC CHECKSUMS:
   ExpoModulesCore: 421e9c6bcb63baf153a5ec22b2b4319addfe331c
   EXUpdatesInterface: 3e444e2093e25b7ca0999a7d8c16e8392dee70c3
   FBLazyVector: 84f6edbe225f38aebd9deaf1540a4160b1f087d7
-  FBReactNativeSpec: 291ffa628409943e6388fbb1b447c2aeb26cf10e
+  FBReactNativeSpec: d0086a479be91c44ce4687a962956a352d2dc697
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: c5d68082e772fa1c511173d6b30a9de2c05a69a2
   hermes-engine: b2669ce35fc4ac14f523b307aff8896799829fe2
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
+  powersync-sqlite-core: b9bcd19fa191d3d6f3f85c0573c41799d654cfa7
   RCT-Folly: 7169b2b1c44399c76a47b5deaaba715eeeb476c0
   RCTRequired: ab7f915c15569f04a49669e573e6e319a53f9faa
   RCTTypeSafety: 63b97ced7b766865057e7154db0e81ce4ee6cf1e
@@ -1429,6 +1437,7 @@ SPEC CHECKSUMS:
   React-logger: 0a57b68dd2aec7ff738195f081f0520724b35dab
   React-Mapbuffer: 63913773ed7f96b814a2521e13e6d010282096ad
   react-native-get-random-values: a6ea6a8a65dc93e96e24a11105b1a9c8cfe1d72a
+  react-native-quick-sqlite: 43013319d3bafba4585bd364bd8d8b778a22eb03
   React-nativeconfig: d7af5bae6da70fa15ce44f045621cf99ed24087c
   React-NativeModulesApple: 0123905d5699853ac68519607555a9a4f5c7b3ac
   React-perflogger: 8a1e1af5733004bdd91258dcefbde21e0d1faccd
@@ -1444,12 +1453,11 @@ SPEC CHECKSUMS:
   React-RCTText: f0176f5f5952f9a4a2c7354f5ae71f7c420aaf34
   React-RCTVibration: 8160223c6eda5b187079fec204f80eca8b8f3177
   React-rendererdebug: ed286b4da8648c27d6ed3ae1410d4b21ba890d5a
-  React-rncore: 318002790813e9185ae2a8eecfdb3afef0f29d9e
+  React-rncore: 43f133b89ac10c4b6ab43702a541dee1c292a3bf
   React-runtimeexecutor: e6ab6bb083dbdbdd489cff426ed0bce0652e6edf
   React-runtimescheduler: ed48e5faac6751e66ee1261c4bd01643b436f112
   React-utils: 6e5ad394416482ae21831050928ae27348f83487
   ReactCommon: 840a955d37b7f3358554d819446bffcf624b2522
-  RealmJS: 054540707292206eadf069f110e79defb632a1b3
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
@@ -1459,4 +1467,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6726b4966a6c2b8bfcb9a73daf8e2e875da48e11
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2
