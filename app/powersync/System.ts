@@ -3,6 +3,7 @@ import React from 'react';
 import { PowerSyncDatabase } from '@powersync/react-native';
 import { BackendConnector } from './BackendConnector';
 import { AppSchema } from './AppSchema';
+import { configureFts } from "../utils/fts_setup";
 
 export class System {
   powersync: PowerSyncDatabase;

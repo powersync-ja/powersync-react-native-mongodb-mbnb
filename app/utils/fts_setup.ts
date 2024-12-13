@@ -59,5 +59,7 @@ async function createFtsTable(tableName: string, columns: string[], tokenization
  * with the data you would like to search on
  */
 export async function configureFts(): Promise<void> {
-  await createFtsTable('listingsAndReview', ['name'], 'porter unicode61');
+  console.log('Creating FTS table');
+  await createFtsTable('listingsAndReviews', ['name']);
+  console.log('FTS table created');
 }

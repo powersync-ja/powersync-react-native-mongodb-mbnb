@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, Ref, useRef } from "react";
 import {
   FlatList,
   Text,
@@ -14,6 +14,7 @@ import {
 import { usePowerSync, useQuery } from "@powersync/react";
 import { LISTINGS_REVIEW_TABLE, ListingsAndReview, ListingsAndReviewRecord } from "./powersync/AppSchema";
 import { BackendConnector } from "./powersync/BackendConnector";
+import { SearchResult, searchTable } from "./utils/fts_helpers";
 
 enum ResultMethod {
   None = "Search Not Performed",
@@ -27,42 +28,19 @@ export const AirbnbList = () => {
   // Offline mode is toggled in state and will affect how search is performed
   const [offlineMode, setOfflineMode] = useState(false);
 
-  // const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   // The search term is stored in state
-  const [searchTerm, setSearchTerm] = useState("");
-
+  // Set the initial value to 'null' to avoid matching any listings
+  const [searchTerm, setSearchTerm] = useState("-null-");
+  const [inputValue, setInputValue] = useState("");
   const { data: records } = useQuery<ListingsAndReviewRecord>(`
-      SELECT
-        ${LISTINGS_REVIEW_TABLE}.*
-      FROM
-        ${LISTINGS_REVIEW_TABLE}
-      LIMIT 10
+      SELECT * FROM ${LISTINGS_REVIEW_TABLE} WHERE name LIKE '%${searchTerm}%'
       `);
 
-  // console.log(records)
+  const handleInputChange = async (value: string) => {
+    setSearchTerm(value)
+  }
 
-  // const handleInputChange = async (value: string) => {
-  //   if (value.length !== 0) {
-  //     let searchResults: any[] = [];
-  //     const listingItemsSearchResults = await searchTable(value, 'listingsAndReview');
-  //     console.log('listingItemsSearchResults', listingItemsSearchResults);
-  //     for (let i = 0; i < listingItemsSearchResults.length; i++) {
-  //       const res = await powersync.get<ListingsAndReview>(`SELECT * FROM ${LISTINGS_REVIEW_TABLE} WHERE id = ?`, [
-  //         listingItemsSearchResults[i]['list_id']
-  //       ]);
-  //       listingItemsSearchResults[i]['list_name'] = res.name;
-  //     }
-  //     if (!listingItemsSearchResults.length) {
-  //       searchResults = await searchTable(value, 'lists');
-  //     }
-  //     const formattedListResults: SearchResult[] = searchResults.map(
-  //       (result) => new SearchResult(result['id'], result['name'])
-  //     );
-  //     setSearchResults([...formattedListResults]);
-  //   }
-  // };
-
-  // This is fake offline mode for demo purposes.
+  // Enable/Disable offline
   useEffect(() => {
     offlineMode
       ? powersync.disconnect()
@@ -81,14 +59,6 @@ export const AirbnbList = () => {
             style={styles.image}
             source={{uri: item.picture_url}}
           />
-          {/*<FastImage*/}
-          {/*  style={styles.image}*/}
-          {/*  source={{*/}
-          {/*    uri: item.images.picture_url,*/}
-          {/*    priority: FastImage.priority.normal,*/}
-          {/*    cache: FastImage.cacheControl.immutable,*/}
-          {/*  }}*/}
-          {/*/>*/}
           <Text>{item.name}</Text>
         </View>
       </Pressable>
@@ -101,10 +71,10 @@ export const AirbnbList = () => {
       <TextInput
         placeholder="Enter Search Term..."
         style={styles.searchInput}
-        value={searchTerm}
-        onChangeText={setSearchTerm}
+        value={inputValue}
+        onChangeText={setInputValue}
       />
-      {/*<Button title="Do Search" onPress={() => handleInputChange(searchTerm)} />*/}
+      <Button title="Do Search" onPress={() => handleInputChange(inputValue)} />
       <FlatList
         data={records}
         renderItem={renderListing}
