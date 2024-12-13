@@ -1,8 +1,54 @@
 import {column, Schema, Table} from "@powersync/react-native";
 
-export const LISTINGS_REVIEW_TABLE = 'listingsAndReview';
+export const LISTINGS_REVIEW_TABLE = 'listingsAndReviews';
 
-const listingsAndReview = new Table({
+export interface ListingsAndReviewRecord {
+  id: string;
+  picture_url: string;
+  access: string;
+  accommodates: number;
+  address: string;
+  amenities: string;
+  availability: string;
+  bathrooms: number;
+  bed_type: string;
+  bedrooms: number;
+  beds: number;
+  calendar_last_scraped: string;
+  cancellation_policy: string;
+  cleaning_fee: string;
+  description: string;
+  extra_people: number;
+  first_review: string;
+  guests_included: number;
+  host: string;
+  house_rules: string;
+  images: string;
+  interaction: string;
+  last_review: string;
+  last_scraped: string;
+  listing_url: string;
+  maximum_nights: string;
+  minimum_nights: string;
+  monthly_price: string;
+  name: string;
+  neighborhood_overview: string;
+  notes: string;
+  number_of_reviews: number;
+  price: string;
+  property_type: string;
+  review_scores: string;
+  reviews: string;
+  room_type: string;
+  security_deposit: string;
+  space: string;
+  summary: string;
+  transit: string;
+  weekly_price: string;
+}
+
+const listingsAndReviews = new Table({
+  picture_url: column.text,
   access: column.text,
   accommodates: column.integer,
   address: column.text,
@@ -46,8 +92,8 @@ const listingsAndReview = new Table({
 });
 
 export const AppSchema = new Schema({
-  listingsAndReview
+  listingsAndReviews
 });
 
 export type Database = (typeof AppSchema)["types"];
-export type ListingsAndReview = Database['listingsAndReview'];
+export type ListingsAndReview = Database['listingsAndReviews'];

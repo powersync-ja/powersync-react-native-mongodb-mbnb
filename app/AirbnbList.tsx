@@ -8,13 +8,11 @@ import {
   Button,
   ListRenderItem,
   Pressable,
-  Platform,
+  Image
 } from "react-native";
-import FastImage from "react-native-fast-image";
 
-import { SearchResult, searchTable } from "./utils/fts_helpers";
-import { usePowerSync } from "@powersync/react";
-import { LISTINGS_REVIEW_TABLE, ListingsAndReview } from "./powersync/AppSchema";
+import { usePowerSync, useQuery } from "@powersync/react";
+import { LISTINGS_REVIEW_TABLE, ListingsAndReview, ListingsAndReviewRecord } from "./powersync/AppSchema";
 import { BackendConnector } from "./powersync/BackendConnector";
 
 enum ResultMethod {
@@ -29,30 +27,40 @@ export const AirbnbList = () => {
   // Offline mode is toggled in state and will affect how search is performed
   const [offlineMode, setOfflineMode] = useState(false);
 
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  // const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   // The search term is stored in state
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleInputChange = async (value: string) => {
-    if (value.length !== 0) {
-      let searchResults: any[] = [];
-      const listingItemsSearchResults = await searchTable(value, 'listingsAndReview');
-      console.log('listingItemsSearchResults', listingItemsSearchResults);
-      for (let i = 0; i < listingItemsSearchResults.length; i++) {
-        const res = await powersync.get<ListingsAndReview>(`SELECT * FROM ${LISTINGS_REVIEW_TABLE} WHERE id = ?`, [
-          listingItemsSearchResults[i]['list_id']
-        ]);
-        listingItemsSearchResults[i]['list_name'] = res.name;
-      }
-      if (!listingItemsSearchResults.length) {
-        searchResults = await searchTable(value, 'lists');
-      }
-      const formattedListResults: SearchResult[] = searchResults.map(
-        (result) => new SearchResult(result['id'], result['name'])
-      );
-      setSearchResults([...formattedListResults]);
-    }
-  };
+  const { data: records } = useQuery<ListingsAndReviewRecord>(`
+      SELECT
+        ${LISTINGS_REVIEW_TABLE}.*
+      FROM
+        ${LISTINGS_REVIEW_TABLE}
+      LIMIT 10
+      `);
+
+  // console.log(records)
+
+  // const handleInputChange = async (value: string) => {
+  //   if (value.length !== 0) {
+  //     let searchResults: any[] = [];
+  //     const listingItemsSearchResults = await searchTable(value, 'listingsAndReview');
+  //     console.log('listingItemsSearchResults', listingItemsSearchResults);
+  //     for (let i = 0; i < listingItemsSearchResults.length; i++) {
+  //       const res = await powersync.get<ListingsAndReview>(`SELECT * FROM ${LISTINGS_REVIEW_TABLE} WHERE id = ?`, [
+  //         listingItemsSearchResults[i]['list_id']
+  //       ]);
+  //       listingItemsSearchResults[i]['list_name'] = res.name;
+  //     }
+  //     if (!listingItemsSearchResults.length) {
+  //       searchResults = await searchTable(value, 'lists');
+  //     }
+  //     const formattedListResults: SearchResult[] = searchResults.map(
+  //       (result) => new SearchResult(result['id'], result['name'])
+  //     );
+  //     setSearchResults([...formattedListResults]);
+  //   }
+  // };
 
   // This is fake offline mode for demo purposes.
   useEffect(() => {
@@ -69,6 +77,10 @@ export const AirbnbList = () => {
         }}
       >
         <View style={styles.listing}>
+          <Image
+            style={styles.image}
+            source={{uri: item.picture_url}}
+          />
           {/*<FastImage*/}
           {/*  style={styles.image}*/}
           {/*  source={{*/}
@@ -92,9 +104,9 @@ export const AirbnbList = () => {
         value={searchTerm}
         onChangeText={setSearchTerm}
       />
-      <Button title="Do Search" onPress={() => handleInputChange(searchTerm)} />
+      {/*<Button title="Do Search" onPress={() => handleInputChange(searchTerm)} />*/}
       <FlatList
-        data={searchResults}
+        data={records}
         renderItem={renderListing}
         keyExtractor={(item) => item.id}
       />

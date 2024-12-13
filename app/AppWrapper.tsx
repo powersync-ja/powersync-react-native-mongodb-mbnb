@@ -8,6 +8,12 @@ import { PowerSyncContext } from "@powersync/react";
 export const AppWrapper: React.FC = () => {
 
   const system: System = useSystem();
+
+  React.useEffect(() => {
+    system.init();
+  }, []);
+
+
   const db = useMemo(() => {
     return system.powersync;
   }, []);
