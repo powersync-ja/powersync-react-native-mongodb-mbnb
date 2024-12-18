@@ -34,7 +34,7 @@ export const AirbnbList = () => {
   const [inputValue, setInputValue] = useState("");
   const { data: records } = useQuery<ListingsAndReviewRecord>(`
       SELECT * FROM ${LISTINGS_REVIEW_TABLE} WHERE name LIKE '%${searchTerm}%'
-      `);
+  `);
 
   const handleInputChange = async (value: string) => {
     setSearchTerm(value)
