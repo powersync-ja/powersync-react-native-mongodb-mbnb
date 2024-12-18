@@ -3,7 +3,6 @@ import React from 'react';
 import { PowerSyncDatabase } from '@powersync/react-native';
 import { BackendConnector } from './BackendConnector';
 import { AppSchema } from './AppSchema';
-import { configureFts } from "../utils/fts_setup";
 
 export class System {
   powersync: PowerSyncDatabase;
@@ -23,11 +22,9 @@ export class System {
     await this.powersync.init();
     await this.powersync.connect(this.backendConnector);
 
-    console.log(this.powersync.connected);
+    console.log(`Is PowerSync connected: ${this.powersync.connected}`);
     await this.powersync.waitForFirstSync();
     console.log("Finished first initial sync.")
-    // await configureFts();
-
   }
 }
 

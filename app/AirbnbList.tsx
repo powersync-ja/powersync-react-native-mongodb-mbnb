@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, Ref, useRef } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   FlatList,
   Text,
@@ -14,14 +14,6 @@ import {
 import { usePowerSync, useQuery } from "@powersync/react";
 import { LISTINGS_REVIEW_TABLE, ListingsAndReview, ListingsAndReviewRecord } from "./powersync/AppSchema";
 import { BackendConnector } from "./powersync/BackendConnector";
-import { SearchResult, searchTable } from "./utils/fts_helpers";
-
-enum ResultMethod {
-  None = "Search Not Performed",
-  Cache = "Cache Hit",
-  Local = "Local Full Text Search",
-  Remote = "Atlas Search",
-}
 
 export const AirbnbList = () => {
   const powersync = usePowerSync();
@@ -29,11 +21,11 @@ export const AirbnbList = () => {
   const [offlineMode, setOfflineMode] = useState(false);
 
   // The search term is stored in state
-  // Set the initial value to 'null' to avoid matching any listings
+  // Set the initial value to '-null-' to avoid matching any listings
   const [searchTerm, setSearchTerm] = useState("-null-");
   const [inputValue, setInputValue] = useState("");
   const { data: records } = useQuery<ListingsAndReviewRecord>(`
-      SELECT * FROM ${LISTINGS_REVIEW_TABLE} WHERE name LIKE '%${searchTerm}%'
+      SELECT *, json_extract(images, '$.picture_url') AS picture_url FROM ${LISTINGS_REVIEW_TABLE} WHERE name LIKE '%${searchTerm}%'
   `);
 
   const handleInputChange = async (value: string) => {
@@ -117,5 +109,5 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 6,
     margin: 6,
-  },
+  }
 });
