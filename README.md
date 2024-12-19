@@ -31,10 +31,10 @@ This app focuses on showing how to use PowerSync to sync items and view them off
 
 * [Node.js](https://nodejs.org/)
 * [React Native development environment](https://reactnative.dev/docs/environment-setup?guide=native)
-    * Refer to the Expo section.
+  * Refer to the Expo section.
 * MongoDB instance with the [sample-airbnb](https://www.mongodb.com/docs/atlas/sample-data/sample-airbnb/) dataset loaded
-  * Add the PowerSync instance to your IP whitelist
-* PowerSync instance
+  * Add the PowerSync instance to your [IP filtering](https://docs.powersync.com/installation/database-setup/security-and-ip-filtering#security-and-ip-filtering)
+* PowerSync instance, either:
   * [Cloud instance](https://powersync.mintlify.app/installation/database-connection#create-a-powersync-cloud-instance)
   * [Self-hosted instance](https://powersync.mintlify.app/self-hosting/getting-started)
 
@@ -44,6 +44,12 @@ From the project root directory, run:
 
 ```sh
 npm install
+```
+## Setup the environment variables
+Copy the `.env.template` file and update the variables accordingly:
+
+```bash
+cp .env.template .env.local
 ```
 
 ### Run the App
