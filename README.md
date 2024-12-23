@@ -45,7 +45,7 @@ From the project root directory, run:
 ```sh
 npm install
 ```
-## Setup the environment variables
+## Set up the Environment Variables
 Copy the `.env.template` file and update the variables accordingly:
 
 ```bash
