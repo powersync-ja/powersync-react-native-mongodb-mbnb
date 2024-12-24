@@ -1,5 +1,5 @@
 export const AppConfig = {
-  powerSyncDevelopmentToken: process.env.EXPO_POWERSYNC_DEVELOPMENTAL_TOKEN || '',
-  powersyncUrl: process.env.EXPO_POWERSYNC_URL,
-  backendUrl: process.env.EXPO_BACKEND_URL,
+  powerSyncDevelopmentToken: process.env.EXPO_PUBLIC_POWERSYNC_DEVELOPMENTAL_TOKEN || '',
+  powersyncUrl: process.env.EXPO_PUBLIC_POWERSYNC_URL,
+  backendUrl: process.env.EXPO_PUBLIC_BACKEND_URL,
 };
