@@ -35,3 +35,7 @@ yarn-error.*
 *.tsbuildinfo
 
 .idea
+
+/backend/node_modules
+/backend/dist
+/backend/.env*.local

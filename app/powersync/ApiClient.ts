@@ -10,6 +10,17 @@ export class ApiClient {
     };
   }
 
+  async getToken(userId: string) {
+    const response = await fetch(`${this.baseUrl}/api/auth/token`, {
+      method: 'GET',
+      headers: this.headers
+    });
+    if (response.status !== 200) {
+      throw new Error(`Server returned HTTP ${response.status}`);
+    }
+    return await response.json();
+  }
+
   async update(data: any): Promise<void> {
     const response = await fetch(`${this.baseUrl}/upload_data/`, {
       method: 'PATCH',
