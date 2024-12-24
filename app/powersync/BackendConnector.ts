@@ -15,10 +15,14 @@ export class BackendConnector implements PowerSyncBackendConnector {
   }
 
   async fetchCredentials() {
-    return {
-      endpoint: AppConfig.powersyncUrl ?? "",
-      token: AppConfig.powerSyncDevelopmentToken ?? "",
-    };
+    const auth = await this.apiClient.getToken("");
+    const powersyncUrl = AppConfig.powersyncUrl ? AppConfig.powersyncUrl : "";
+    const data = {
+      endpoint: powersyncUrl,
+      token: auth.token
+    }
+    console.log(data);
+    return data;
   }
 
   async uploadData(database: AbstractPowerSyncDatabase): Promise<void> {
