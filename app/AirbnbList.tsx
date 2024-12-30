@@ -24,7 +24,7 @@ export const AirbnbList = () => {
   // Set the initial value to '-null-' to avoid matching any listings
   const [searchTerm, setSearchTerm] = useState("-null-");
   const [inputValue, setInputValue] = useState("");
-  const { data: records } = useQuery<ListingsAndReviewRecord>(`
+  const { data: records } = useQuery<ListingsAndReviewRecord & { picture_url: string }>(`
       SELECT *, json_extract(images, '$.picture_url') AS picture_url FROM ${LISTINGS_REVIEW_TABLE} WHERE name LIKE '%${searchTerm}%'
   `);
 
