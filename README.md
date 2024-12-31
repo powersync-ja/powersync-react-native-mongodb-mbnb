@@ -3,7 +3,8 @@
 This is a demo application which was used to port a Realm based application to PowerSync. The original Realm
 implementation can be [found here](https://github.com/realm/realm-js/tree/main/examples/rn-mbnb).
 
-This repo also contains a Node.js backend API that receives upload from the client.
+This repo also contains a Node.js backend API using Express and TypeScript. This API will receive the changes uploaded 
+by the client and will write them back to the MongoDB database. You can run this alongside the frontend project.
 
 ## Project Structure
 
@@ -68,8 +69,8 @@ cp .env.template .env.local
 Before running the app, start the backend server:
 
 ```bash
-npm install
 cd backend
+npm install
 npm start
 ```
 iOS:
