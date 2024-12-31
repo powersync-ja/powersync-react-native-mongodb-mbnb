@@ -3,6 +3,9 @@
 This is a demo application which was used to port a Realm based application to PowerSync. The original Realm
 implementation can be [found here](https://github.com/realm/realm-js/tree/main/examples/rn-mbnb).
 
+This repo also contains a Node.js backend API using Express and TypeScript. This API will receive the changes uploaded 
+by the client and will write them back to the MongoDB database. You can run this alongside the frontend project.
+
 ## Project Structure
 
 The following shows the project structure and the most relevant files.
@@ -14,11 +17,20 @@ The following shows the project structure and the most relevant files.
 │        ├── AppSchema.ts
 │        ├── BackendConnector.ts
 │        └── System.ts
-│    ├── AirbnbList.tsx          - Main application screen
-│    ├── AppWrapper.tsx          - Main wrapper with PowerSync Providers
-├── App.js                    - Entry point
-├── package.json              - Dependencies
-└── README.md                 - Instructions and info
+│    ├── AirbnbList.tsx           - Main application screen
+│    ├── AppWrapper.tsx           - Main wrapper with PowerSync Providers
+├── backend                       - Backend server
+│    └── src
+│         ├── controllers               
+│         ├── middleware               
+│         ├── mongo               
+│         ├── util
+│    ├── Server.ts                        
+│    ├── config.ts                        
+│    ├── package.json             - Dependencies             
+├── App.js                        - App Entry point
+├── package.json                  - Dependencies
+└── README.md                     - Instructions and info
 ```
 
 ## Use Cases
@@ -52,16 +64,25 @@ Copy the `.env.template` file and update the variables accordingly:
 cp .env.template .env.local
 ```
 
-### Run the App
+## Run the App
 
+Before running the app, start the backend server:
+
+```bash
+cd backend
+npm install
+npm start
+```
 iOS:
 ```sh
+# Run this from the project root directory
 npm run ios
 ```
 
 Run on Android:
 
 ```sh
+# Run this from the project root directory
 npm run android
 ```
 
