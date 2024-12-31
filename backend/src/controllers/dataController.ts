@@ -4,15 +4,10 @@ import MongoPersistence from "../mongo/mongoPersistence";
 
 export default class DataController {
     public router: Router;
-    public mongoPersistence: MongoPersistence;
 
     constructor() {
         this.router = Router();
         this.initRoutes();
-        this.mongoPersistence = new MongoPersistence({
-            name: config.database.database,
-            uri: config.database.uri
-        });
     }
 
     private initRoutes() {
@@ -29,9 +24,12 @@ export default class DataController {
                 });
                 return;
             }
-            
-            await this.mongoPersistence.init();
-            await this.mongoPersistence.update(req.body);
+            const mongoPersistence = new MongoPersistence({
+                name: config.database.database,
+                uri: config.database.uri
+            });
+            await mongoPersistence.init();
+            await mongoPersistence.update(req.body);
             res.status(200).send();
         } catch (err) {
             console.log(err);
@@ -49,8 +47,12 @@ export default class DataController {
                 });
                 return;
             }
-            await this.mongoPersistence.init();
-            await this.mongoPersistence.upsert(req.body);
+            const mongoPersistence = new MongoPersistence({
+                name: config.database.database,
+                uri: config.database.uri
+            });
+            await mongoPersistence.init();
+            await mongoPersistence.upsert(req.body);
             res.status(200).send();
         } catch (err) {
             res.status(500).send({
@@ -67,8 +69,12 @@ export default class DataController {
                 });
                 return;
             }
-            await this.mongoPersistence.init();
-            await this.mongoPersistence.delete(req.body);
+            const mongoPersistence = new MongoPersistence({
+                name: config.database.database,
+                uri: config.database.uri
+            });
+            await mongoPersistence.init();
+            await mongoPersistence.delete(req.body);
             res.status(200).send();
         } catch (err) {
             res.status(500).send({
