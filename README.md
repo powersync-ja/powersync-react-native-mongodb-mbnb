@@ -54,7 +54,7 @@ This app focuses on showing how to use PowerSync to sync items and view them off
 From the project root directory, run:
 
 ```sh
-tnpm install
+npm install
 ```
 ## Set up the Environment Variables
 Copy the `.env.template` file and update the variables accordingly:
@@ -68,6 +68,7 @@ cp .env.template .env.local
 Before running the app, start the backend server:
 
 ```bash
+npm install
 cd backend
 npm start
 ```
