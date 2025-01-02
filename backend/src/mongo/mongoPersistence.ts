@@ -2,7 +2,6 @@ import {Db, MongoClient, ObjectId} from "mongodb";
 
 export type UpdateEvent = {
     table: string;
-    id: string;
     data: any;
 }
 
@@ -11,7 +10,7 @@ export default class MongoPersistence {
     private database: Db;
 
     constructor(config: { name: string, uri: string }) {
-        this.client = new MongoClient(`${config.uri}?directConnection=true`);
+        this.client = new MongoClient(`${config.uri}`);
         this.database = this.client.db(config.name);
     }
 
@@ -22,7 +21,7 @@ export default class MongoPersistence {
     async update (updateEvent: UpdateEvent): Promise<void> {
         try {
             console.log(updateEvent);
-            const filter = { _id: new ObjectId(updateEvent.id) };
+            const filter = { _id: new ObjectId(updateEvent.data.id) };
             const collection = this.database.collection(updateEvent.table);
             const updateDoc = {
                 $set: { ...updateEvent.data }
@@ -40,7 +39,7 @@ export default class MongoPersistence {
     async upsert (updateEvent: UpdateEvent): Promise<void> {
         try {
             console.log(updateEvent);
-            const filter = { _id: new ObjectId(updateEvent.id) };
+            const filter = { _id: new ObjectId(updateEvent.data.id) };
             const collection = this.database.collection(updateEvent.table);
             const updateDoc = {
                 $set: { ...updateEvent.data }
@@ -61,7 +60,7 @@ export default class MongoPersistence {
     async delete (updateEvent: UpdateEvent): Promise<void> {
         try {
             console.log(updateEvent);
-            const filter = { _id: new ObjectId(updateEvent.id) };
+            const filter = { _id: new ObjectId(updateEvent.data.id) };
             const collection = this.database.collection(updateEvent.table);
             const result = await collection.deleteOne(filter);
             console.log(result);

@@ -61,7 +61,7 @@ npm install
 Copy the `.env.template` file and update the variables accordingly:
 
 ```bash
-cp .env.template .env.local
+cp .env.template .env
 ```
 
 ## Run the App
